@@ -1,15 +1,16 @@
-import React from "react";
-import { Link } from "react-location";
-import { useMatch } from "react-location";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import { currency } from "../lib/products";
+import { Product, getProducts, currency } from "../lib/products";
 import { addToCart, useLoggedIn } from "../lib/cart";
-
-import type { LocationGenerics } from "../router";
 
 export default function HomeContent() {
   const loggedIn = useLoggedIn();
-  const { products } = useMatch<LocationGenerics>().data;
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    getProducts().then(setProducts);
+  }, []);
 
   return (
     <div className="grid grid-cols-4 gap-5">

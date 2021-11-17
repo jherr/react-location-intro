@@ -1,14 +1,23 @@
-import React from "react";
-import { useMatch } from "react-location";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import { currency } from "../lib/products";
+import { Product, getProductById, currency } from "../lib/products";
 import { addToCart, useLoggedIn } from "../lib/cart";
-
-import type { LocationGenerics } from "../router";
 
 export default function PDPContent() {
   const loggedIn = useLoggedIn();
-  const { product } = useMatch<LocationGenerics>().data;
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product>();
+
+  useEffect(() => {
+    if (id) {
+      getProductById(id).then(setProduct);
+    } else {
+      setProduct(null);
+    }
+  }, [id]);
+
+  if (!product) return null;
 
   return (
     <div className="grid grid-cols-2 gap-5">

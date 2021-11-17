@@ -6,11 +6,10 @@ import { currency } from "../lib/products";
 export default function CartContent() {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  useEffect(
-    () =>
-      cart.subscribe((value) => setItems(value?.cartItems ?? [])).unsubscribe,
-    []
-  );
+  useEffect(() => {
+    const sub = cart.subscribe((value) => setItems(value?.cartItems ?? []));
+    return () => sub.unsubscribe();
+  }, []);
 
   return (
     <>

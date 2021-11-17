@@ -1,24 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Router, Outlet } from "react-location";
 
 import Header from "./Header";
 import Footer from "./Footer";
 
-import PDPContent from "./PDPContent";
-import HomeContent from "./HomeContent";
-import CartContent from "./CartContent";
+import { routes, location } from "../router";
 
 export default function MainLayout() {
   return (
-    <Router>
+    <Router routes={routes} location={location}>
       <div className="text-3xl mx-auto max-w-6xl">
         <Header />
         <div className="my-10">
-          <Routes>
-            <Route path="/" element={<HomeContent />} />
-            <Route path="/product/:id" element={<PDPContent />} />
-            <Route path="/cart" element={<CartContent />} />
-          </Routes>
+          <Outlet />
         </div>
         <Footer />
       </div>

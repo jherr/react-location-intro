@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-location";
+import { Link } from "react-router-dom";
 
 import MiniCart from "./MiniCart";
 import Login from "./Login";
