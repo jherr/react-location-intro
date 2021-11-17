@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, ReactLocation, MakeGenerics } from "react-location";
-import { getProductById, getProducts, Product } from "./lib/products";
+import { Product } from "./lib/products";
 
 export const routes: Route[] = [
   {
